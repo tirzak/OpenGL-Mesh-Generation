@@ -1,0 +1,36 @@
+#version 330 core
+out vec4 FragColor;
+
+in vec3 Normal_cameraspace;
+in vec3 EyeDirection_cameraspace;
+in vec3 LightDirection_cameraspace;
+
+uniform vec3 modelColor;
+
+
+void main()
+{
+
+    vec4 LightColor = vec4(1,1,1,1);
+
+    vec4 MaterialDiffuseColor = vec4(modelColor,1.0);
+    vec4 MaterialAmbientColor = vec4(0.2,0.2,0.2,MaterialDiffuseColor.a) * MaterialDiffuseColor;
+    vec4 MaterialSpecularColor = vec4(0.7, 0.7, 0.7,MaterialDiffuseColor.a);
+
+    vec3 n = normalize( Normal_cameraspace );
+    vec3 l = normalize( LightDirection_cameraspace );
+    float cosTheta = clamp( dot( n,l ), 0,1 );
+
+    vec3 E = normalize(EyeDirection_cameraspace);
+    vec3 R = reflect(-l,n);
+    float cosAlpha = clamp( dot( E,R ), 0,1 );
+    float shininess = 64.0f;
+    FragColor =
+        // Ambient : simulates indirect lighting
+        MaterialAmbientColor +
+        // Diffuse : "color" of the object
+        MaterialDiffuseColor * LightColor * cosTheta +
+        // Specular : reflective highlight, like a mirror
+        MaterialSpecularColor * LightColor * pow(cosAlpha,shininess);
+   
+} 
