@@ -1,5 +1,5 @@
 
-
+## Mesh Generation - Marching Cubes Algorithm
 There are three sources (camera.cpp, write_ply.cpp, and L20.cpp). 
 Overview:
 
@@ -41,18 +41,15 @@ To run:
 Use the format function number(1 or 2) screenW(optional) screenH(optional)
 Example:
 Mesh1: 
-./Assignment5.out 1
+./marching_cubes.out 1
 
 Mesh2: 
-./Assignment5.out 2
+./marching_cubes.out 2
 
 With screenW and screenH
-./Assignment5.out 1 800 800
+./marching_cubes.out 1 800 800
 or,
-./Assignment5.out 2 800 800
-
-Or, you can just compile it manually. All of the sources need to be compiled. So, something like 
-g++ camera.cpp write_ply.cpp L20.cpp -std=c++11 (Include/link libraries for the dependencies here) -o Assignment5.out
+./marching_cubes.out 2 800 800
 
 
 References:
